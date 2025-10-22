@@ -1,19 +1,25 @@
-import { StatusBar, StyleSheet, Text, View,Platform } from 'react-native'
+import { StyleSheet, Text, View,Platform, useColorScheme ,ToastAndroid} from 'react-native'
 import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Stack } from 'expo-router'
-
+import { Colors } from '../constants/Colors';
+import { StatusBar } from 'expo-status-bar';
 const RootLayout = () => {
-  return (
+    const colorScheme = useColorScheme()
+    const theme = Colors[colorScheme] ?? Colors.light
 
+  return (
+    <>
+    <StatusBar value="auto"/>
     <Stack initialRouteName='index' screenOptions={{
-        headerStyle : {backgroundColor : '#ddd'},
-        headerTintColor:'#333'
+        headerStyle : {backgroundColor : theme.navBackground},
+        headerTintColor:theme.title
     }}>
         <Stack.Screen name='index' options={{title:'Home'}}/>
         <Stack.Screen name='about' options={{title:'About'}}/>
         <Stack.Screen name='contact' options={{title:'Contact'}}/>
     </Stack>
+    </>
   )
 }
 
